@@ -1,1 +1,3 @@
+*.ipynb filter=strip-notebook-output 
+
 .ipynb_checkpoints/

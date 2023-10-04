@@ -17,7 +17,7 @@ mutable struct Histograms
     end
 end
 
-function pbc(system, i)
+function pbc!(system, i)
     system.particles[i] -= floor(system.particles[i] / system.L) * system.L
 end
 
@@ -47,16 +47,6 @@ function calc_particle_interaction(system::System, i)
     E
 end
 
-function do_sweep(system::System; sweep=10, inout_probability=0.5)
-    for _ in 1:sweep
-        if rand() < inout_probability
-            rand() < 0.5 ? trial_insert(system) : trial_delete(system)
-        else
-            trial_move(system)
-        end
-    end
-end
-
 function trial_insert(system)
     add_particle!(system, rand() * system.L)
     i = length(system.particles)
@@ -79,49 +69,10 @@ function trial_delete(system)
     end
 end
 
-function trial_move(system; dxmax=0.1)
-    if isempty(system.particles)
-        return
-    end
-    i = rand(1:length(system.particles))
-    xbefore = system.particles[i]
-    Ebefore = calc_particle_interaction(system, i)
-    system.particles[i] += dxmax * (2 * rand() - 1)
-    pbc(system, i)
-    Eafter = calc_particle_interaction(system, i)
-    ΔE = Eafter - Ebefore
-    if rand() > exp(-ΔE)
-        # Rejected, reset particle to previous state
-        system.particles[i] = xbefore
-    end
-end
-
-function do_sample(system::System, histograms::Histograms)
-    for x in system.particles
-        bin = ceil(Int, x / L * histograms.bins)
-        histograms.ρ[bin] += 1
-    end
-    histograms.count += 1
-end
-
 function get_results(system::System, histograms::Histograms)
     dx = histograms.dx
     Dict(
         :x => collect(dx/2:dx:system.L-dx/2),
         :ρ => histograms.ρ / (histograms.count * dx)
     )
-end
-
-function simulate(L::Number, μ::Number, Vext::Function, ϕ::Function; equilibrate_steps=100000, production_steps=1000000, sweep=10)
-    system = System(L, μ, Vext, ϕ)
-    histograms = Histograms(system)
-    for _ in 1:equilibrate_steps
-        do_sweep(system; sweep)
-        do_sample(system, histograms)
-    end
-    for _ in 1:production_steps
-        do_sweep(system; sweep)
-        do_sample(system, histograms)
-    end
-    get_results(system::System, histograms)
 end
