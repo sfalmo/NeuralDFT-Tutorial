@@ -1,7 +1,6 @@
-using LinearAlgebra
 using FFTW
 
-function conv_fft(f::Vector, g::Vector, dx::Number; rfftP=plan_rfft(f))
+function conv_fft(f::Vector, g::Vector; dx::Number=0.01, rfftP=plan_rfft(f))
     rfftP \ ((rfftP * f) .* (rfftP * g)) * dx
 end
 

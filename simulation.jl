@@ -71,8 +71,5 @@ end
 
 function get_results(system::System, histograms::Histograms)
     dx = histograms.dx
-    Dict(
-        :x => collect(dx/2:dx:system.L-dx/2),
-        :ρ => histograms.ρ / (histograms.count * dx)
-    )
+    collect(dx/2:dx:system.L-dx/2), histograms.ρ / (histograms.count * dx)
 end
