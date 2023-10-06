@@ -12,12 +12,12 @@ mutable struct Histograms
     dx::Float64
     ρ::Vector{Float64}
     count::Int
-    function Histograms(system::System; bins::Int=1000)
+    function Histograms(system::System; bins=1000)
         new(bins, system.L / bins, zeros(bins), 0)
     end
 end
 
-function pbc!(system, i)
+function pbc!(system::System, i)
     system.particles[i] -= floor(system.particles[i] / system.L) * system.L
 end
 
@@ -47,7 +47,7 @@ function calc_particle_interaction(system::System, i)
     E
 end
 
-function trial_insert(system)
+function trial_insert(system::System)
     add_particle!(system, rand() * system.L)
     i = length(system.particles)
     ΔE = calc_particle_interaction(system, i)
@@ -57,7 +57,7 @@ function trial_insert(system)
     end
 end
 
-function trial_delete(system)
+function trial_delete(system::System)
     if isempty(system.particles)
         return
     end
