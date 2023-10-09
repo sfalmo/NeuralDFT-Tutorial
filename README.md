@@ -10,18 +10,20 @@ This is a tutorial for the methods presented in:
 
 ## Instructions
 
-### Run online in Binder
+### Run online in Binder or Google Colab
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/sfalmo/NeuralDFT-Tutorial/HEAD?labpath=Tutorial.ipynb)
 
-You can try out the tutorial in your browser using Binder (click on the above badge).
-Starting the Binder instance for the first time might take quite long as some packages have to be installed, so please be patient.
-Note that any changes you make to the notebook and code are not saved automatically after closing the Binder instance!
-However, you can save the state of the notebook and download generated data manually.
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/sfalmo/NeuralDFT-Tutorial/Tutorial.ipynb)
+
+You can try out the tutorial in your browser using Binder or Google Colab.
+If you are particularly interested in the machine learning part, use Google Colab with a free GPU instance, but you will have to do some manual steps to get Julia running.
+Binder comes with Julia and is ready to go, but it has no GPU, so the machine learning will be very slow (it might still suffice for proof-of-concept work).
+In both cases, remember to manually save your changes and generated data/models, as they will be deleted once the instance is shut down.
 
 ### Run locally
 
-You need a working install of Julia and Jupyter.
+You need a working install of Julia.
 Launch the Julia interpreter in this directory and type `]` to enter the package manager.
 Then activate the environment and install the required packages as follows:
 
