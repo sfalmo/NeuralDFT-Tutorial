@@ -31,7 +31,7 @@ function generate_inout(ρ_profiles, c1_profiles; window_bins=201)
     for (ρ, c1) in zip(ρ_profiles, c1_profiles)
         ρ_windows = generate_windows(ρ; window_bins)
         for i in 1:length(c1)
-            if isnan(c1[i])
+            if !isfinite(c1[i])
                 continue
             end
             push!(ρ_windows_all, ρ_windows[:,i])
