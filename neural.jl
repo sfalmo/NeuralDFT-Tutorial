@@ -1,7 +1,3 @@
-using DelimitedFiles
-using Flux: train!
-using Flux
-
 function read_sim_data(dir)
     ρ_profiles = Vector{Vector{Float64}}()
     c1_profiles = Vector{Vector{Float64}}()
@@ -16,7 +12,7 @@ function read_sim_data(dir)
 end
 
 function generate_windows(ρ; window_bins=201)
-    ρ_windows = zeros(window_bins, length(ρ))
+    ρ_windows = zeros(eltype(ρ), window_bins, length(ρ))
     pad = window_bins ÷ 2 - 1
     ρpad = vcat(ρ[end-pad:end], ρ, ρ[begin:begin+pad])
     for i in 1:length(ρ)
@@ -26,8 +22,8 @@ function generate_windows(ρ; window_bins=201)
 end
 
 function generate_inout(ρ_profiles, c1_profiles; window_bins=201)
-    ρ_windows_all = Vector{Vector{Float64}}()
-    c1_values_all = Vector{Float64}()
+    ρ_windows_all = Vector{Vector{eltype(ρ_profiles[begin])}}()
+    c1_values_all = Vector{eltype(c1_profiles[begin])}()
     for (ρ, c1) in zip(ρ_profiles, c1_profiles)
         ρ_windows = generate_windows(ρ; window_bins)
         for i in 1:length(c1)
