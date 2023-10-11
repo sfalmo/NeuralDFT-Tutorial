@@ -2,8 +2,7 @@ function read_sim_data(dir)
     ρ_profiles = Vector{Vector{Float64}}()
     c1_profiles = Vector{Vector{Float64}}()
     for sim in readdir(dir, join=true)
-        sim_data = readdlm(sim)
-        xs, μloc, ρ = sim_data[:, 1], sim_data[:, 2], sim_data[:, 3]
+        xs, μloc, ρ = eachcol(readdlm(sim))
         c1 = log.(ρ) .- μloc
         push!(ρ_profiles, ρ)
         push!(c1_profiles, c1)
@@ -22,8 +21,8 @@ function generate_windows(ρ; window_bins=201)
 end
 
 function generate_inout(ρ_profiles, c1_profiles; window_bins=201)
-    ρ_windows_all = Vector{Vector{eltype(ρ_profiles[begin])}}()
-    c1_values_all = Vector{eltype(c1_profiles[begin])}()
+    ρ_windows_all = Vector{Vector{Float32}}()
+    c1_values_all = Vector{Float32}()
     for (ρ, c1) in zip(ρ_profiles, c1_profiles)
         ρ_windows = generate_windows(ρ; window_bins)
         for i in 1:length(c1)
@@ -34,5 +33,5 @@ function generate_inout(ρ_profiles, c1_profiles; window_bins=201)
             push!(c1_values_all, c1[i])
         end
     end
-    Float32.(reduce(hcat, ρ_windows_all)), Float32.(c1_values_all')
+    reduce(hcat, ρ_windows_all), c1_values_all'
 end
