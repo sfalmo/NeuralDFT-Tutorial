@@ -34,5 +34,5 @@ function generate_inout(ρ_profiles, c1_profiles; window_bins=201)
             push!(c1_values_all, c1[i])
         end
     end
-    Float32.(hcat(ρ_windows_all...)), Float32.(c1_values_all')
+    Float32.(reduce(hcat, ρ_windows_all)), Float32.(c1_values_all')
 end
