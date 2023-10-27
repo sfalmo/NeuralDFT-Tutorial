@@ -1,7 +1,7 @@
 using FFTW
 
-function conv_fft(f::Vector, g::Vector; dx::Number=0.01, rfftP=plan_rfft(f))
-    rfftP \ ((rfftP * f) .* (rfftP * g)) * dx
+function conv_fft(f::Vector, g::Vector; dx::Number=0.01)
+    irfft(rfft(f) .* rfft(g), length(f)) * dx
 end
 
 function get_weights_Percus(xs)
