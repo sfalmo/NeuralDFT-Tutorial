@@ -13,7 +13,7 @@ function read_sim_data(dir)
 end
 
 function generate_windows(ρ; window_bins)
-    ρ_windows = Zygote.Buffer(zeros(eltype(ρ), window_bins, length(ρ)))  # We use a Zygote Buffer here to keep autodifferentiability
+    ρ_windows = Zygote.Buffer(zeros(Float32, window_bins, length(ρ)))  # We use a Zygote Buffer here to keep autodifferentiability
     pad = window_bins ÷ 2 - 1
     ρpad = vcat(ρ[end-pad:end], ρ, ρ[1:1+pad])
     for i in 1:length(ρ)
