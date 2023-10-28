@@ -22,8 +22,6 @@ In both cases, remember to manually save your changes and generated data/models,
 ### Run locally
 
 You need a working install of Julia.
-Additionally, for plotting, you need Python with matplotlib (but you can easily replace `PyPlot` with `Plots` in the package manager and in the notebook if you want to use the standard Julia plotting library).
-
 Launch the Julia interpreter in this directory and type `]` to enter the package manager.
 Then activate the environment and install the required packages as follows:
 

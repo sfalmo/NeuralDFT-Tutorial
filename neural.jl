@@ -12,17 +12,18 @@ function read_sim_data(dir)
     ρ_profiles, c1_profiles
 end
 
-function generate_windows(ρ; window_bins=201)
+function generate_windows(ρ; window_bins)
     ρ_windows = Zygote.Buffer(zeros(eltype(ρ), window_bins, length(ρ)))  # We use a Zygote Buffer here to keep autodifferentiability
     pad = window_bins ÷ 2 - 1
-    ρpad = vcat(ρ[end-pad:end], ρ, ρ[begin:begin+pad])
+    ρpad = vcat(ρ[end-pad:end], ρ, ρ[1:1+pad])
     for i in 1:length(ρ)
         ρ_windows[:,i] = ρpad[i:i+window_bins-1]
     end
-    copy(ρ_windows)
+    copy(ρ_windows)  # copy needed due to Zygote.Buffer
 end
 
-function generate_inout(ρ_profiles, c1_profiles; window_bins=201)
+function generate_inout(ρ_profiles, c1_profiles; window_width, dx)
+    window_bins = 2 * round(Int, window_width / dx) + 1
     ρ_windows_all = Vector{Vector{Float32}}()
     c1_values_all = Vector{Float32}()
     for (ρ, c1) in zip(ρ_profiles, c1_profiles)
@@ -40,7 +41,7 @@ function generate_inout(ρ_profiles, c1_profiles; window_bins=201)
     reduce(hcat, ρ_windows_all), c1_values_all'
 end
 
-function finite_diff(a; dx=0.01)
+function finite_diff(a; dx)
     dv = diff(a) / 2
     v = [dv[1]; dv]
     v .+= [dv; dv[end]]
