@@ -5,7 +5,7 @@ function conv_fft(f::Vector, g::Vector; dx::Number=0.01)
 end
 
 function get_weights_Percus(xs)
-    xs .-= xs[begin] # undo shift of dx/2
+    xs = xs .- xs[begin] # undo shift of dx/2
     dx = xs[2]
     L = xs[end] + dx
     R = 0.5

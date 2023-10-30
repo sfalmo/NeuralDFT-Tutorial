@@ -45,5 +45,5 @@ function finite_diff(a; dx)
     dv = diff(a) / 2
     v = [dv[1]; dv]
     v .+= [dv; dv[end]]
-    v
+    v / dx
 end
