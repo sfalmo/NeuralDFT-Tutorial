@@ -36,7 +36,7 @@ function remove_particle!(system::System, i)
     deleteat!(system.particles, i)
 end
 
-function calc_particle_interaction(system::System, i)
+function calc_energy(system::System, i)
     xi = system.particles[i]
     E = system.Vext(xi)
     for xj in system.particles
@@ -51,7 +51,7 @@ end
 function trial_insert(system::System)
     add_particle!(system, rand() * system.L)
     i = length(system.particles)
-    ΔE = calc_particle_interaction(system, i)
+    ΔE = calc_energy(system, i)
     if rand() > system.L / length(system.particles) * exp(system.β * (system.μ - ΔE))
         # Rejected, undo trial insert
         remove_particle!(system, i)
@@ -63,7 +63,7 @@ function trial_delete(system::System)
         return
     end
     i = rand(1:length(system.particles))
-    ΔE = calc_particle_interaction(system, i)
+    ΔE = calc_energy(system, i)
     if rand() < length(system.particles) / system.L * exp(system.β * (ΔE - system.μ))
         # Accepted, do the actual removal
         remove_particle!(system, i)
