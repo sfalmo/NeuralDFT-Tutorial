@@ -4,6 +4,9 @@ function read_sim_data(dir)
     ρ_profiles = Vector{Vector{Float64}}()
     c1_profiles = Vector{Vector{Float64}}()
     for sim in readdir(dir, join=true)
+        if !endswith(sim, ".dat")
+            continue
+        end
         xs, μloc, ρ = eachcol(readdlm(sim))
         c1 = log.(ρ) .- μloc
         push!(ρ_profiles, ρ)

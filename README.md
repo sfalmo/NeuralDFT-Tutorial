@@ -3,10 +3,10 @@
 This is a tutorial for the methods presented in:
 
 **Neural functional theory for inhomogeneous fluids: Fundamentals and applications**  
-*Florian Sammüller, Sophie Hermann, Daniel de las Heras, and Matthias Schmidt (2023); [arXiv:2307.04539](https://arxiv.org/abs/2307.04539).*
+*Florian Sammüller, Sophie Hermann, Daniel de las Heras, and Matthias Schmidt, [Proc. Natl. Acad. Sci. **120**, e2312484120](https://doi.org/10.1073/pnas.2312484120) (2023); [arXiv:2307.04539](https://arxiv.org/abs/2307.04539).*
 
 **Why neural functionals suit statistical mechanics**  
-*Florian Sammüller, Sophie Hermann, and Matthias Schmidt (2023).*
+*Florian Sammüller, Sophie Hermann, and Matthias Schmidt (2023); [arXiv:2312.04681](https://arxiv.org/abs/2312.04681).*
 
 ## Instructions
 
