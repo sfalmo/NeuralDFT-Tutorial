@@ -1,6 +1,10 @@
-# Instructions for Google Colab
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/sfalmo/NeuralDFT-Tutorial/blob/master/Tutorial.ipynb)
 
-In Google Colab, you can use a machine with an Nvidia GPU for free, but you first have to install Julia and the required packages.
+# Instructions for Google Colab (experimental)
+
+Google Colab provides limited free access to an Nvidia GPU, but Julia and the required packages have to be installed manually in the Colab runtime.
+Note that the Julia ecosystem is not officially supported, so consider this an experimental setup.
+
 Follow these steps each time you start a new runtime:
 
 1. Connect to a GPU runtime:
@@ -13,7 +17,7 @@ Follow these steps each time you start a new runtime:
 %%shell
 set -e
 
-JULIA_VERSION="1.9.2"
+JULIA_VERSION="1.9.4"
 
 if [ -z `which julia` ]; then
     JULIA_VER=`cut -d '.' -f -2 <<< "$JULIA_VERSION"`
@@ -42,16 +46,14 @@ echo "Done."
 
 3. Switch to the Julia kernel:
    - Click the arrow (&#9660;) next to *Connect* and select *Change runtime type*
-   - Under *Runtime type*, select the option "julia 1.9.2" (do not change the *Hardware accelerator* which you have chosen in step 1)
-4. Install the required Julia packages: create a new cell, copy the following code and run it. This will also take a few minutes.
+   - Under *Runtime type*, select the option "julia 1.9.4" (do not change the *Hardware accelerator* which you have chosen in step 1)
+4. Install the required Julia packages: create a new cell, copy the following code and run it. This will take a few minutes.
 
 ```julia
 import Pkg
 Pkg.activate(".")
-Pkg.add("CUDA")
-Pkg.add("cuDNN")
 Pkg.instantiate()
 ```
 
 You can now start the tutorial.
-As all required packages have just been installed, the GPU is automatically used where needed.
+As all required packages have just been installed, the GPU is automatically used where applicable.

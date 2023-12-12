@@ -10,20 +10,11 @@ This is a tutorial for the methods presented in:
 
 ## Instructions
 
-### Run online in Binder or Google Colab
+### Run locally (recommended)
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/sfalmo/NeuralDFT-Tutorial/HEAD?labpath=Tutorial.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/sfalmo/NeuralDFT-Tutorial/blob/master/Tutorial.ipynb)
-
-You can try out the tutorial in your browser using Binder or Google Colab.
-If you are particularly interested in the machine learning part, use Google Colab with a free GPU instance, but you will have to do some manual steps to get Julia running.
-Binder comes with Julia and is ready to go, but it has no GPU, so the machine learning will be very slow (it might still suffice for proof-of-concept work).
-In both cases, remember to manually save your changes and generated data/models, as they will be deleted once the instance is shut down.
-
-### Run locally
-
-You need a working install of Julia.
-Launch the Julia interpreter in this directory and type `]` to enter the package manager.
-Then activate the environment and install the required packages as follows:
+A recent version of [Julia](https://julialang.org/downloads/) needs to be installed on your system.
+Launch the Julia interpreter within this directory and type `]` to enter the package manager.
+Activate the environment and install the required packages as follows:
 
 ```julia
 activate .
@@ -31,11 +22,21 @@ instantiate
 ```
 
 Type backspace to exit the package manager.
-Then start a Jupyter server:
+Start a Jupyter server:
 
 ```julia
 using IJulia
 jupyterlab()
 ```
 
-This should open up JupyterLab in your browser where you can navigate to `Tutorial.ipynb`.
+This should open JupyterLab in your browser where you can navigate to `Tutorial.ipynb`.
+
+### Run online
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/sfalmo/NeuralDFT-Tutorial/HEAD?labpath=Tutorial.ipynb)
+
+You can try out the tutorial in your browser using Binder.
+Note that Binder provides very limited computational resources and no access to a GPU, so the machine learning parts will be very slow (it might still be sufficient for some proof-of-concept work).
+Remember to manually save and download your changes and generated data/models, as they will be deleted once the instance is shut down.
+
+We also provide [instructions](Colab_instructions.md) for an experimental setup in Google Colab.
