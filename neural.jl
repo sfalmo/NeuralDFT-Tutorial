@@ -7,8 +7,8 @@ function read_sim_data(dir)
         if !endswith(sim, ".dat")
             continue
         end
-        xs, μloc, ρ = eachcol(readdlm(sim))
-        c1 = log.(ρ) .- μloc
+        xs, βμloc, ρ = eachcol(readdlm(sim))
+        c1 = log.(ρ) .- βμloc
         push!(ρ_profiles, ρ)
         push!(c1_profiles, c1)
     end
