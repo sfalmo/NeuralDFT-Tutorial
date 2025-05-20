@@ -35,8 +35,8 @@ This should open JupyterLab in your browser where you can navigate to `Tutorial.
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/sfalmo/NeuralDFT-Tutorial/HEAD?labpath=Tutorial.ipynb)
 
-You can try out the tutorial in your browser using Binder.
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/sfalmo/NeuralDFT-Tutorial/blob/master/Tutorial.ipynb)
+
+You can try out the tutorial in your browser using Binder or Google Colab.
 Note that Binder provides very limited computational resources and no access to a GPU, so the machine learning parts will be very slow (it might still be sufficient for some proof-of-concept work).
 Remember to manually save and download your changes and generated data/models, as they will be deleted once the instance is shut down.
-
-We also provide [instructions](Colab_instructions.md) for an experimental setup in Google Colab.
